@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FormEventHandler, useContext, useState} from 'react';
+import React, {ChangeEvent, useContext, useState} from 'react';
 import {Context} from '../routes/layout.tsx';
 import FormDialog from './dialog.tsx';
 import {TaskModel, TaskPriority, TaskStatus} from '../models/task.model.ts';
@@ -324,7 +324,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
   );
 }
 const ITable = ({data, headers, title}: TableProps) => {
-  const {tasks, removeTask, addTask, updateTasks} = useContext(Context);
+  const {removeTask, addTask, updateTasks} = useContext(Context);
   const [dialog, setDialog] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [selectedTask, setSelectedTask] = useState<TaskModel>(new TaskModel());
