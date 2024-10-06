@@ -36,6 +36,7 @@ import {visuallyHidden} from '@mui/utils';
 import {Add, Delete, Edit, Search} from '@mui/icons-material';
 import {v4 as uuid} from 'uuid';
 import moment, {Moment} from 'moment';
+import useDebounce from '../utilities/useDebounce.tsx';
 
 export type TableProps = {
   data: Array<any>,
@@ -166,9 +167,13 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
     setFilter({status: [], priority: [], fromDate: moment().startOf('month').toDate(), toDate: moment().endOf('month').toDate()});
   }
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onSearch(event.target.value);
     setSearch(event.target.value);
   }
+  useDebounce(() => {
+    if (search.length > 2) {
+      onSearch(search);
+    }
+  }, [search], 500);
   return (
     <Toolbar
       sx={[
@@ -434,7 +439,9 @@ const ITable = ({data, headers, title}: TableProps) => {
     setFilter(filterInput);
   }
   const onSearch = (searchInput: string) => {
-    setSearch(searchInput);
+    if (searchInput !== search) {
+      setSearch(searchInput);
+    }
   }
   return (
     <>
@@ -456,7 +463,7 @@ const ITable = ({data, headers, title}: TableProps) => {
                 rowCount={data.length}
               />
               <TableBody>
-                {visibleRows.map((row, index) => {
+                {visibleRows.map((row) => {
                   return (
                     <TableRow hover tabIndex={-1} key={row.id}>
                       {
