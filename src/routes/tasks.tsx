@@ -4,7 +4,7 @@ import Table from '../components/table.tsx';
 import {TaskModel} from '../models/task.model.ts';
 import moment from 'moment';
 
-const Tasks = () => {
+export const Tasks = () => {
   const {tasks, initTasks} = useContext(Context);
   const url = 'https://dummyjson.com/c/5647-88d9-4675-8c22';
   useEffect(() => {
@@ -34,4 +34,3 @@ const Tasks = () => {
     </>
   )
 }
-export default Tasks;
