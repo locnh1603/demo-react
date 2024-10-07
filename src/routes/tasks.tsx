@@ -1,13 +1,10 @@
-import {useContext} from 'react';
-import {Context} from './layout.tsx';
 import Table from '../components/table.tsx';
 import React from 'react';
 import useFetch from '../utilities/useFetch.tsx';
+import {useParams} from 'react-router-dom';
 const Tasks = () => {
-  const {tasks, initTasks} = useContext(Context);
-  // const { userId } = useParams();
-  const {data} = useFetch(`https://dummyjson.com/c/5647-88d9-4675-8c22`);
-  initTasks(data || []);
+  const {userId} = useParams();
+  const {data} = useFetch(`https://dummyjson.com/c/${userId}`);
   const headers = [
     {title: 'Task Name', field: 'taskName'},
     {title: 'Created Date', field: 'createdDate', render: 'date'},
@@ -17,7 +14,7 @@ const Tasks = () => {
   ];
   return (
     <>
-      {data ? <Table title={'Tasks'} headers={headers} data={tasks}></Table> : null}
+      {data ? <Table title={'Tasks'} headers={headers} data={data}></Table> : null}
     </>
   )
 }

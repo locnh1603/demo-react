@@ -4,16 +4,20 @@ import Nav from '../components/nav.tsx';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import React from 'react';
+import {UserModel} from '../models/user.model.ts';
 const defaultValue = {
+  users: [] as UserModel[],
   tasks: [] as TaskModel[],
   updateTasks: (task: TaskModel, id: string) => {},
   addTask: (task: TaskModel) => {},
   removeTask: (id: string) => {},
-  initTasks: (tasks: TaskModel[]) => {}
+  initTasks: (tasks: TaskModel[]) => {},
+  initUsers: (users: UserModel[]) => {}
 }
 export const Context = createContext(defaultValue);
 const Layout = ({children}: {children: ReactNode}) => {
   const [tasks, setTasks] = useState(Array<TaskModel>);
+  const [users, setUsers] = useState(Array<UserModel>);
   const initTasks= (newTasks: TaskModel[]) => {
     setTasks(newTasks);
   }
@@ -32,12 +36,17 @@ const Layout = ({children}: {children: ReactNode}) => {
     newTasks.splice(index, 1);
     setTasks(newTasks);
   }
+  const initUsers = (newUsers: UserModel[]) => {
+    setUsers(newUsers);
+  }
   const value = {
     tasks,
+    users,
     updateTasks,
     addTask,
     removeTask,
-    initTasks
+    initTasks,
+    initUsers
   }
   return (
     <Context.Provider value={value}>

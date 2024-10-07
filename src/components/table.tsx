@@ -435,6 +435,7 @@ const ITable = ({data, headers, title}: TableProps) => {
         .sort(getComparator(sort.order, sort.field)).slice(page * size, page * size + size),
         [sort.order, sort.field, page, size, filter, search, data]
   );
+  console.log(visibleRows, data);
   const onFilter = (filterInput: TaskFilter) => {
     setFilter(filterInput);
   }
