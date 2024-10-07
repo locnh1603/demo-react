@@ -2,7 +2,8 @@ import {createContext, ReactNode, useState} from 'react';
 import {TaskModel} from '../models/task.model.ts';
 import Nav from '../components/nav.tsx';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import React from 'react';
 const defaultValue = {
   tasks: [] as TaskModel[],
   updateTasks: (task: TaskModel, id: string) => {},
@@ -49,4 +50,4 @@ const Layout = ({children}: {children: ReactNode}) => {
     </Context.Provider>
   );
 }
-export default Layout;
+export default React.memo(Layout);

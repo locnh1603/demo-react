@@ -6,12 +6,12 @@ import Layout from './routes/layout.tsx';
 import ErrorPage from './routes/error.tsx';
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/:userId',
     errorElement: <ErrorPage></ErrorPage>,
     lazy: async() => {
       const Tasks = await import('./routes/tasks.tsx');
       return {
-        Component: Tasks.Tasks
+        Component: Tasks.default
       }
     }
   }
