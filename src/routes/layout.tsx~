@@ -14,6 +14,7 @@ export const Context = createContext(defaultValue);
 const Layout = ({children}: {children: ReactNode}) => {
   const [tasks, setTasks] = useState(Array<TaskModel>);
   const initTasks= (newTasks: TaskModel[]) => {
+    console.log(newTasks);
     setTasks(newTasks);
   }
   const updateTasks = (task: TaskModel, id: string) => {
